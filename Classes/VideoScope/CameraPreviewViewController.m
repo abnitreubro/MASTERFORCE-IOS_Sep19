@@ -136,7 +136,7 @@ static NSData *_endMarkerData = nil;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (!self.navigationController.navigationBarHidden)
         {
-            [UIView  animateWithDuration:.5 animations:^{
+            [UIView  animateWithDuration:2.0 animations:^{
                 [[self navigationController] setNavigationBarHidden:YES animated:YES];
                 _bottomButtonView.alpha = 0;
             }];

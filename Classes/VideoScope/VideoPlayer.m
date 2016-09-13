@@ -137,15 +137,15 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if (!self.navigationController.navigationBarHidden)
-        {
-            [UIView  animateWithDuration:.5 animations:^{
-                [[self navigationController] setNavigationBarHidden:YES animated:YES];
-                controlsView.alpha = 0;
-            }];
-        }
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        if (!self.navigationController.navigationBarHidden)
+//        {
+//            [UIView  animateWithDuration:.5 animations:^{
+//                [[self navigationController] setNavigationBarHidden:YES animated:YES];
+//                controlsView.alpha = 0;
+//            }];
+//        }
+//    });
 }
 
 
@@ -326,21 +326,13 @@
 
 #pragma mark - Device Rotation
 
-- (BOOL)shouldAutorotate{
-    if([[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeLeft ||[[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeRight || [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortrait)
-        return YES;
-    else
-        return NO;
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.view layoutIfNeeded];
+    [playerLayer setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view layoutIfNeeded];
 }
 
-// Handling the player on rotation
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation ]== UIDeviceOrientationLandscapeRight || [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortrait)
-    {
-        [playerLayer setFrame:CGRectMake(0, 0, imageContainingView.frame.size.height, imageContainingView.frame.size.width)];
-    }
-}
 
 
 
